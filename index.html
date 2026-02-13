@@ -80,9 +80,9 @@ animation:glow 1.5s infinite alternate;
 
 <body>
 
-<!-- SONG -->
+<!-- MAIN SONG -->
 <audio id="song" loop>
-<source src="YOUR_SONG_LINK.mp3" type="audio/mpeg">
+<source src="love.mp3" type="audio/mpeg">
 </audio>
 
 <div class="box">
@@ -95,7 +95,7 @@ animation:glow 1.5s infinite alternate;
 
 <script>
 
-/* proposal typing */
+/* typing proposal */
 let lines=[
 "Happy Valentine's Day chlm ❤️",
 "",
@@ -141,10 +141,14 @@ startHearts();
 /* YES CLICK */
 function yes(){
 
-// PLAY SONG
+// force play song after click
 let s=document.getElementById("song");
-s.volume=0.6;
-s.play();
+if(s){
+ setTimeout(()=>{
+   s.volume=0.6;
+   s.play().catch(()=>{});
+ },200);
+}
 
 document.body.innerHTML+=`
 <div style="
@@ -153,11 +157,11 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-text-align:center;
 position:fixed;
 top:0;
 left:0;
 width:100%;
+background:rgba(255,255,255,0.7);
 ">
 
 <h1 id="loveText" style="
@@ -174,7 +178,6 @@ Click here my future husband 💍
 </div>
 `;
 
-startHearts();
 typeLoveScreen();
 }
 
@@ -196,13 +199,13 @@ function type(){
 type();
 }
 
-/* GO NEXT */
+/* NEXT PAGE */
 function goNext(){
 
 document.body.innerHTML=`
 
 <audio autoplay loop>
-<source src="YOUR_SONG_LINK.mp3" type="audio/mpeg">
+<source src="love.mp3" type="audio/mpeg">
 </audio>
 
 <div style="margin-top:120px;padding:25px;text-align:center">
