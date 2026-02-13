@@ -81,7 +81,7 @@ button{
 
 <body>
 
-<!-- SONG -->
+<!-- SONG (never removed) -->
 <audio id="song">
  <source src="song.mp3" type="audio/mpeg">
 </audio>
@@ -96,14 +96,19 @@ button{
 
 <script>
 
-/* autoplay workaround */
-window.addEventListener("click",()=>{
- let s=document.getElementById("song");
- s.volume=0.7;
- s.play();
-},{once:true});
+/* START SONG ON FIRST TOUCH */
+let songStarted=false;
+function startSong(){
+ if(!songStarted){
+   let s=document.getElementById("song");
+   s.volume=0.7;
+   s.play();
+   songStarted=true;
+ }
+}
+document.body.addEventListener("click",startSong);
 
-/* typing lines */
+/* typing */
 let lines=[
 "Happy Valentine's Day chlm ❤️",
 "",
