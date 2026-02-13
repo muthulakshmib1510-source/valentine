@@ -45,21 +45,20 @@ button{
  cursor:pointer;
  display:none;
 }
-
 .noBtn{ background:#999; }
 
 .glowBtn{
- padding:16px 40px;
- font-size:22px;
- border:none;
- border-radius:50px;
- background:#0a2a43;
- color:white;
- cursor:pointer;
- display:none;
- margin-top:25px;
- font-weight:bold;
- animation:glow 1.5s infinite alternate;
+padding:16px 40px;
+font-size:22px;
+border:none;
+border-radius:50px;
+background:#0a2a43;
+color:white;
+cursor:pointer;
+display:none;
+margin-top:25px;
+font-weight:bold;
+animation:glow 1.5s infinite alternate;
 }
 
 @keyframes glow{
@@ -81,12 +80,10 @@ button{
 
 <body>
 
-<!-- SONG (never removed) -->
-<audio id="song">
- <source src="song.mp3" type="audio/mpeg">
-</audio>
+<!-- SONG (continuous) -->
+<audio id="song" src="song.mp3" loop autoplay></audio>
 
-<div class="box">
+<div id="mainPage" class="box">
 <h1>Ammu ❤️</h1>
 <p id="text"></p>
 
@@ -96,17 +93,10 @@ button{
 
 <script>
 
-/* START SONG ON FIRST TOUCH */
-let songStarted=false;
-function startSong(){
- if(!songStarted){
-   let s=document.getElementById("song");
-   s.volume=0.7;
-   s.play();
-   songStarted=true;
- }
-}
-document.body.addEventListener("click",startSong);
+/* ensure autoplay */
+window.addEventListener("click",()=>{
+ document.getElementById("song").play();
+},{once:true});
 
 /* typing */
 let lines=[
@@ -154,32 +144,11 @@ startHearts();
 /* YES */
 function yes(){
 
-document.body.innerHTML+=`
-<div style="
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-">
-
-<h1 id="loveText" style="
-font-family:'Cinzel',serif;
-font-size:95px;
-letter-spacing:6px;
-color:#0a2a43;
-"></h1>
-
+document.getElementById("mainPage").innerHTML=`
+<h1 id="loveText" style="font-size:95px;"></h1>
 <button id="goBtn" onclick="goNext()" class="glowBtn">
 Click here my future husband 💍
 </button>
-
-</div>
 `;
 
 typeLoveScreen();
@@ -203,22 +172,12 @@ function type(){
 type();
 }
 
-/* GO NEXT */
+/* NEXT PAGE */
 function goNext(){
 
-document.body.innerHTML+=`
-<div style="margin-top:120px;padding:25px;text-align:center">
-
-<h1 style="
-font-family:'Cinzel',serif;
-font-size:60px;
-color:#0a2a43;
-">
-Forever with you 💍
-</h1>
-
-<p id="afterText" style="font-size:24px;line-height:1.9"></p>
-</div>
+document.getElementById("mainPage").innerHTML=`
+<h1 style="font-size:60px;">Forever with you 💍</h1>
+<p id="afterText" style="font-size:24px;"></p>
 `;
 
 typeAfterMessage();
