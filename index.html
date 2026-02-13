@@ -80,9 +80,9 @@ animation:glow 1.5s infinite alternate;
 
 <body>
 
-<!-- MAIN SONG -->
+<!-- SONG -->
 <audio id="song" loop>
-<source src="love.mp3" type="audio/mpeg">
+<source src="song.mp3" type="audio/mpeg">
 </audio>
 
 <div class="box">
@@ -95,7 +95,6 @@ animation:glow 1.5s infinite alternate;
 
 <script>
 
-/* typing proposal */
 let lines=[
 "Happy Valentine's Day chlm ❤️",
 "",
@@ -125,7 +124,6 @@ function typeLine(){
 }
 typeLine();
 
-/* hearts */
 function startHearts(){
  setInterval(()=>{
   let h=document.createElement("div");
@@ -138,30 +136,26 @@ function startHearts(){
 }
 startHearts();
 
-/* YES CLICK */
 function yes(){
 
-// force play song after click
 let s=document.getElementById("song");
-if(s){
- setTimeout(()=>{
-   s.volume=0.6;
-   s.play().catch(()=>{});
- },200);
-}
+s.currentTime = 0;
+s.volume = 0.6;
+s.play().catch(()=>{});
 
-document.body.innerHTML+=`
+document.body.insertAdjacentHTML("beforeend",`
 <div style="
 height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+text-align:center;
 position:fixed;
 top:0;
 left:0;
 width:100%;
-background:rgba(255,255,255,0.7);
+background:linear-gradient(120deg,#87ceeb,#cceeff);
 ">
 
 <h1 id="loveText" style="
@@ -176,12 +170,12 @@ Click here my future husband 💍
 </button>
 
 </div>
-`;
+`);
 
+startHearts();
 typeLoveScreen();
 }
 
-/* I LOVE YOU typing */
 function typeLoveScreen(){
 let title="I LOVE YOU AMMU";
 let i=0;
@@ -199,14 +193,9 @@ function type(){
 type();
 }
 
-/* NEXT PAGE */
 function goNext(){
 
 document.body.innerHTML=`
-
-<audio autoplay loop>
-<source src="love.mp3" type="audio/mpeg">
-</audio>
 
 <div style="margin-top:120px;padding:25px;text-align:center">
 
@@ -226,7 +215,6 @@ startHearts();
 typeAfterMessage();
 }
 
-/* final msg */
 let msg=[
 "You're always with me in my lowest time and happiest time.",
 "",
