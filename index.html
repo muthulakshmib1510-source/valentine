@@ -45,20 +45,21 @@ button{
  cursor:pointer;
  display:none;
 }
+
 .noBtn{ background:#999; }
 
 .glowBtn{
-padding:16px 40px;
-font-size:22px;
-border:none;
-border-radius:50px;
-background:#0a2a43;
-color:white;
-cursor:pointer;
-display:none;
-margin-top:25px;
-font-weight:bold;
-animation:glow 1.5s infinite alternate;
+ padding:16px 40px;
+ font-size:22px;
+ border:none;
+ border-radius:50px;
+ background:#0a2a43;
+ color:white;
+ cursor:pointer;
+ display:none;
+ margin-top:25px;
+ font-weight:bold;
+ animation:glow 1.5s infinite alternate;
 }
 
 @keyframes glow{
@@ -81,8 +82,8 @@ animation:glow 1.5s infinite alternate;
 <body>
 
 <!-- SONG -->
-<audio id="song" loop>
-<source src="song.mp3" type="audio/mpeg">
+<audio id="song">
+ <source src="song.mp3" type="audio/mpeg">
 </audio>
 
 <div class="box">
@@ -95,6 +96,14 @@ animation:glow 1.5s infinite alternate;
 
 <script>
 
+/* autoplay workaround */
+window.addEventListener("click",()=>{
+ let s=document.getElementById("song");
+ s.volume=0.7;
+ s.play();
+},{once:true});
+
+/* typing lines */
 let lines=[
 "Happy Valentine's Day chlm ❤️",
 "",
@@ -124,6 +133,7 @@ function typeLine(){
 }
 typeLine();
 
+/* hearts */
 function startHearts(){
  setInterval(()=>{
   let h=document.createElement("div");
@@ -136,14 +146,10 @@ function startHearts(){
 }
 startHearts();
 
+/* YES */
 function yes(){
 
-let s=document.getElementById("song");
-s.currentTime = 0;
-s.volume = 0.6;
-s.play().catch(()=>{});
-
-document.body.insertAdjacentHTML("beforeend",`
+document.body.innerHTML+=`
 <div style="
 height:100vh;
 display:flex;
@@ -155,7 +161,6 @@ position:fixed;
 top:0;
 left:0;
 width:100%;
-background:linear-gradient(120deg,#87ceeb,#cceeff);
 ">
 
 <h1 id="loveText" style="
@@ -170,12 +175,12 @@ Click here my future husband 💍
 </button>
 
 </div>
-`);
+`;
 
-startHearts();
 typeLoveScreen();
 }
 
+/* I LOVE YOU typing */
 function typeLoveScreen(){
 let title="I LOVE YOU AMMU";
 let i=0;
@@ -193,10 +198,10 @@ function type(){
 type();
 }
 
+/* GO NEXT */
 function goNext(){
 
-document.body.innerHTML=`
-
+document.body.innerHTML+=`
 <div style="margin-top:120px;padding:25px;text-align:center">
 
 <h1 style="
@@ -211,10 +216,10 @@ Forever with you 💍
 </div>
 `;
 
-startHearts();
 typeAfterMessage();
 }
 
+/* final msg */
 let msg=[
 "You're always with me in my lowest time and happiest time.",
 "",
